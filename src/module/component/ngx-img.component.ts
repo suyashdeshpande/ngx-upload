@@ -75,7 +75,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   }
 
   fileChangeListener(e: any) {
-    console.log('file change event', e);
+    // console.log('file change event', e);
     this.hasError = false;
     this.errors = [];
     if (!e.target.files.length) {
@@ -83,7 +83,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
       return false;
     }
     this.files = e.target.files;
-    console.log('files are', this.files);
+    // console.log('files are', this.files);
 
     this.file = e.target.files[0];
 
@@ -102,9 +102,9 @@ export class NgxImgComponent implements OnInit, OnDestroy {
           this.isLoading = true;
           const reader: FileReader = new FileReader();
           reader.onloadend = (ev: any) => {
-            console.log('File Reader onLoad event', ev);
+            // console.log('File Reader onLoad event', ev);
             this.imgSrc = [...this.imgSrc, ev.target.result];
-            console.log('img src', this.imgSrc);
+            // console.log('img src', this.imgSrc);
             this.fileName = this.file.name;
             this.hasPreview = true;
             this.isLoading = false;
@@ -187,7 +187,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   onSelectEvent(data: any) {
     this.onSelect.emit(data);
     this.onSelectEventData = data;
-    console.log('on select event', data);
+    // console.log('on select event', data);
   }
 
   upload() {
@@ -197,14 +197,14 @@ export class NgxImgComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.uploadSuccess = false;
         }, 4000);
-        console.log('Uploaded successfully');
+        // console.log('Uploaded successfully');
       }, er => {
         this.reset();
         this.uploadFail = true;
         setTimeout(() => {
           this.uploadFail = false;
         }, 4000);
-        console.log('Upload Failed');
+        // console.log('Upload Failed');
       });
   }
 
