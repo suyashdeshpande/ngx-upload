@@ -139,6 +139,8 @@ export class NgxImgComponent implements OnInit, OnDestroy {
     this.files = [];
     this.uploadFail = false;
     this.uploadSuccess = false;
+    this.compressedFiles = [];
+    this.croppedFiles = [];
     this.hasPreview = false;
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
@@ -241,6 +243,9 @@ export class NgxImgComponent implements OnInit, OnDestroy {
 
   delete(img: string) {
     this.imgSrc = this.imgSrc.filter(x => x !== img);
+    if (this.mode === 'upload') {
+      this.compressedFiles.filter(x => x !== img);
+    }
     if (!this.imgSrc.length) {
       this.reset();
     }
