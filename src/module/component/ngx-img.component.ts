@@ -60,6 +60,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   mode = 'upload';
   onSelectEventData: any;
   compressedFiles: any[] = [];
+  croppedFiles: any[] = [];
   uploadSuccess: boolean = false;
   uploadFail: boolean = false;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -185,27 +186,53 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   }
 
   onSelectEvent(data: any) {
+    if (this.mode === 'crop') {
+      this.croppedFiles = [...this.croppedFiles, data];
+    }
     this.onSelect.emit(data);
     this.onSelectEventData = data;
     // console.log('on select event', data);
   }
 
   upload() {
-    this._service.upload(this.onSelectEventData, this.config.url)
-      .subscribe(res => {
-        this.uploadSuccess = true;
-        setTimeout(() => {
-          this.uploadSuccess = false;
-        }, 4000);
-        // console.log('Uploaded successfully');
-      }, er => {
-        this.reset();
-        this.uploadFail = true;
-        setTimeout(() => {
-          this.uploadFail = false;
-        }, 4000);
-        // console.log('Upload Failed');
+    if (this.mode === 'crop') {
+      this.croppedFiles.forEach(file => {
+        this._service.upload(file, this.config.url)
+          .subscribe(res => {
+            this.uploadSuccess = true;
+            setTimeout(() => {
+              this.uploadSuccess = false;
+            }, 4000);
+            // console.log('Uploaded successfully');
+          }, er => {
+            this.reset();
+            this.uploadFail = true;
+            setTimeout(() => {
+              this.uploadFail = false;
+            }, 4000);
+            // console.log('Upload Failed');
+          });
       });
+    } else {
+      console.log(this.compressedFiles);
+    this.compressedFiles.forEach(file => {
+      this._service.upload(file, this.config.url)
+        .subscribe(res => {
+          this.uploadSuccess = true;
+          setTimeout(() => {
+            this.uploadSuccess = false;
+          }, 4000);
+          // console.log('Uploaded successfully');
+        }, er => {
+          this.reset();
+          this.uploadFail = true;
+          setTimeout(() => {
+            this.uploadFail = false;
+          }, 4000);
+          // console.log('Upload Failed');
+        });
+    });
+  }
   }
 
   ngOnDestroy() {

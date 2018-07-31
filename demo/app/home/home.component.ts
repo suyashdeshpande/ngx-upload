@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSelect($event: any) {
-    console.log('home component on select event', $event);
+    // console.log('home component on select event', $event);
     this.imgSrc = [];
     switch (typeof($event)) {
       case 'string':
