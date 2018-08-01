@@ -97,6 +97,11 @@ export class NgxImgComponent implements OnInit, OnDestroy {
 
     this.fileName = this.file.name;
     this.onChange.emit(this.file);
+    if (this._config.crop) {
+      if (this.files.length === 1) {
+        this.mode = 'crop';
+      }
+    }
 
     for (let i in this.files) {
       if (this.files.hasOwnProperty(i)) {
@@ -111,19 +116,15 @@ export class NgxImgComponent implements OnInit, OnDestroy {
             this.fileName = this.file.name;
             this.hasPreview = true;
             this.isLoading = false;
-            if (this._config.crop) {
-              if (this.files.length === 1) {
-                this.mode = 'crop';
-              }
-            } else {
-              this._service.compress(this.imgSrc[i], this._config).then((res: any) => {
-                this.compressedFiles = [...this.compressedFiles, res];
-              })
-                .catch((err) => {
-                  this.onSelectEvent(this.imgSrc);
-                  console.error('Compress failed', err);
-                });
-            }
+
+            this._service.compress(this.imgSrc[i], this._config).then((res: any) => {
+              this.compressedFiles = [...this.compressedFiles, res];
+            })
+              .catch((err) => {
+                this.onSelectEvent(this.imgSrc);
+                console.error('Compress failed', err);
+              });
+
           };
           reader.readAsDataURL(this.files[i]);
         }
@@ -272,8 +273,10 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   delete(img: string) {
     this.imgSrc = this.imgSrc.filter(x => x !== img);
     this.selectedImages = this.imgSrc;
+    // console.log('this.files after delete', this.files);
     if (this.mode === 'upload') {
-      this.compressedFiles.filter(x => x !== img);
+      // this.compressedFiles.filter(x => x !== img);
+      this.compressedFiles = this.imgSrc;
     }
     if (!this.imgSrc.length) {
       this.reset();
