@@ -23,7 +23,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   @Input() errorTexts: INgxErrorText;
   @Input() text: INgxText;
 
-  selectedImages: object;
+  selectedImages: any;
   hasPreview = false;
   hasError = false;
   isLoading = false;
@@ -226,6 +226,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   }
 
   upload() {
+    // console.log('selected images', this.selectedImages);
     if (this.mode === 'crop') {
       this.croppedFiles.forEach(file => {
         this._service.upload(file, this.config.url)

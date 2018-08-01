@@ -84,4 +84,7 @@ export class NgxImgService {
   upload(data: any, url: string) {
     return this.http.post(url, data);
   }
+  get(url: string) {
+    this.http.get(url);
+  }
 }
