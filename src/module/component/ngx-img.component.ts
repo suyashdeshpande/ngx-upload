@@ -23,7 +23,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   @Input() errorTexts: INgxErrorText;
   @Input() text: INgxText;
 
-
+  selectedImages: object;
   hasPreview = false;
   hasError = false;
   isLoading = false;
@@ -106,6 +106,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
           reader.onloadend = (ev: any) => {
             // console.log('File Reader onLoad event', ev);
             this.imgSrc = [...this.imgSrc, ev.target.result];
+            this.selectedImages = this.imgSrc;
             // console.log('img src', this.imgSrc);
             this.fileName = this.file.name;
             this.hasPreview = true;
@@ -136,6 +137,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
     this.file = null;
     // this.imgSrc = '';
     this.imgSrc = [];
+    this.selectedImages = [];
     this.fileName = '';
     this.files = [];
     this.uploadFail = false;
@@ -197,11 +199,13 @@ export class NgxImgComponent implements OnInit, OnDestroy {
       switch (typeof data) {
         case 'string':
           this.imgSrc = [data];
+          this.selectedImages = this.imgSrc;
           this.croppedFiles = [data];
           // console.log('imgSrc is string', this.imgSrc);
           break;
         case 'object':
           this.imgSrc = data;
+          this.selectedImages = this.imgSrc;
           this.croppedFiles = data;
           // console.log('imgSrc is object', this.imgSrc);
           break;
@@ -216,6 +220,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
     }
     this.onSelect.emit(data);
     this.onSelectEventData = data;
+    // console.log('selected images', this.selectedImages);
     // console.log('on select event', data);
   }
 
@@ -266,6 +271,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
 
   delete(img: string) {
     this.imgSrc = this.imgSrc.filter(x => x !== img);
+    this.selectedImages = this.imgSrc;
     if (this.mode === 'upload') {
       this.compressedFiles.filter(x => x !== img);
     }

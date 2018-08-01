@@ -57,7 +57,7 @@
 <div *ngIf="imgSrc.length" class="container mt-3">
   <h5 *ngIf="mode === 'upload'">Preview (Click to remove)</h5>
   <div class="row">
-    <div *ngFor="let img of imgSrc" class="col">
+    <div *ngFor="let img of imgSrc; let i = index" class="col">
       <img class="img-fluid" [src]="img" (click)="delete(img)">
     </div>
   </div>
