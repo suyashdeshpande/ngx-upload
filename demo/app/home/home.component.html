@@ -44,7 +44,7 @@
             <div highlight="all" class="my-3">
               <pre><code class="hljs html" [textContent]="htmlCode1"></code></pre>
             </div>
-            <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{url: '/postreq'}"></ngx-img>
+            <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{url: '/dummyUrl'}"></ngx-img>
           </div>
         </ng-template>
         <ng-template [ngSwitchCase]="2">
@@ -52,7 +52,7 @@
             <div highlight="all" class="my-3">
               <pre><code class="hljs html" [textContent]="htmlCode2"></code></pre>
             </div>
-            <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [ { ratio: 1.5, viewMode: 0 } ], quality: 0.8 , url: '/postreq'}"></ngx-img>
+            <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [ { ratio: 1.5, viewMode: 0 } ], quality: 0.8 , url: '/dummyUrl'}"></ngx-img>
           </div>
         </ng-template>
         <ng-template [ngSwitchCase]="3">
@@ -60,7 +60,7 @@
             <div highlight="all" class="my-3">
               <pre><code class="hljs html" [textContent]="htmlCode3"></code></pre>
             </div>
-            <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [ { ratio: 1.5, viewMode: 0 }, { ratio: 1, viewMode: 0 }], url: '/postreq'}"></ngx-img>
+            <ngx-img (onSelect)="onSelect($event)" (onReset)="reset()" [config]="{ crop: [ { ratio: 1.5, viewMode: 0 }, { ratio: 1, viewMode: 0 }], url: '/dummyUrl'}"></ngx-img>
           </div>
         </ng-template>
       </ng-container>
@@ -68,7 +68,7 @@
   </div>
   <!--<div *ngIf="imgSrc.length" class="container mt-3">-->
     <!--<h5>Preview</h5>-->
-    <!--<div class="row" *ngIf="imgSrc.length > 1">-->
+    <!--<div class="row">-->
       <!--<div *ngFor="let img of imgSrc" class="col">-->
         <!--<img class="img-fluid" [src]="img" (click)="delete(img)">-->
       <!--</div>-->

@@ -23,6 +23,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   @Input() errorTexts: INgxErrorText;
   @Input() text: INgxText;
 
+
   hasPreview = false;
   hasError = false;
   isLoading = false;
@@ -60,7 +61,7 @@ export class NgxImgComponent implements OnInit, OnDestroy {
   mode = 'upload';
   onSelectEventData: any;
   compressedFiles: any[] = [];
-  croppedFiles: any[] = [];
+  croppedFiles: any = [];
   uploadSuccess: boolean = false;
   uploadFail: boolean = false;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -192,12 +193,17 @@ export class NgxImgComponent implements OnInit, OnDestroy {
 
     if (this.mode === 'crop') {
       // this.croppedFiles = [...this.croppedFiles, data];
-      switch (typeof(data)) {
+      // console.log('on select event data after crop', data);
+      switch (typeof data) {
         case 'string':
           this.imgSrc = [data];
+          this.croppedFiles = [data];
+          // console.log('imgSrc is string', this.imgSrc);
           break;
         case 'object':
           this.imgSrc = data;
+          this.croppedFiles = data;
+          // console.log('imgSrc is object', this.imgSrc);
           break;
         default:
       }
