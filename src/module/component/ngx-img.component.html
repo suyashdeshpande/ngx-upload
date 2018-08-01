@@ -45,19 +45,28 @@
                   (onReset)="reset()"></ngx-img-crop>
   </ng-template>
   <ul class="nav nav-tabs" style="color: #007bff">
-    <li class="nav-link" (click)="upload()">Upload</li>
-    <li class="nav-link" (click)="reset()">Reset</li>
+    <li class="nav-link" (click)="upload()" style="cursor: pointer">Upload</li>
+    <li class="nav-link" (click)="reset()" style="cursor: pointer">Reset</li>
   </ul>
   <div>
     <p *ngIf="uploadSuccess">Uploaded Successfully</p>
     <p *ngIf="uploadFail">Upload Failed</p>
   </div>
 </ng-container>
+
 <div *ngIf="imgSrc.length" class="container mt-3">
-  <h5>Preview (Click to remove)</h5>
-  <div class="row">
+  <h5 *ngIf="mode === 'upload'">Preview (Click to remove)</h5>
+  <div class="row" *ngIf="mode === 'upload'">
     <div *ngFor="let img of imgSrc" class="col">
       <img class="img-fluid" [src]="img" (click)="delete(img)">
     </div>
   </div>
 </div>
+
+<!--<div class="container mt-3">-->
+<!--<div class="row" *ngIf="mode === 'crop'">-->
+  <!--<div class="col">-->
+    <!--<img class="img-fluid" [src]="croppedFiles">-->
+  <!--</div>-->
+<!--</div>-->
+<!--</div>-->

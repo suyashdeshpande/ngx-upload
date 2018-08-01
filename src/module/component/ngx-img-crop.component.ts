@@ -28,7 +28,7 @@ export class NgxImgCropComponent implements OnInit, OnDestroy {
   };
   timer: any = [];
   cropper: any = [];
-  imgData: any = [];
+   imgData: any = [];
 
   constructor(private _service: NgxImgService) {
   }
@@ -86,6 +86,7 @@ export class NgxImgCropComponent implements OnInit, OnDestroy {
       this.imgData[i] = res;
       const img = this.imgData.length === 1 ? this.imgData[i] : this.imgData;
       this.onCrop.emit(img);
+      console.log('on crop event ngx-crop component', img);
     })
     .catch(() => {
       this.imgData[i] = data;
