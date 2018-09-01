@@ -46,15 +46,15 @@ export class HomeComponent implements OnInit {
     this.titleService.setTitle('Home');
   }
 
-  onSelect($event: any) {
-    // console.log('home component on select event', $event);
+  onSelect(ev: any) {
+    console.log('on select event in home component', ev);
     this.imgSrc = [];
-    switch (typeof($event)) {
+    switch (typeof(ev)) {
       case 'string':
-        this.imgSrc = [$event];
+        this.imgSrc = [ev];
         break;
       case 'object':
-        this.imgSrc = $event;
+        this.imgSrc = ev;
         break;
       default:
     }
